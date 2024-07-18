@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <button onclick="window.location.href = '/logout'">Cerrar Sesión</button>
+    <h1>Inicio Dirigente</h1>
+    <h3>Cedula</h3>
+    {{ current_user.cedula }}
+    <h3>Nombre</h3>
+    {{ current_user.nombre }}
+    <h3>Equipo</h3>
+    {% if current_user.equipo %}
+    <form action="/editar/equipo" method="post" style="margin-bottom: 3px;">
+        <p><b>Nombre: </b><input type="text" name="nombre" value="{{ current_user.equipo.nombre }}"></p>
+        <p><b>Ciudad: </b><input type="text" name="ciudad" value="{{ current_user.equipo.ciudad }}"></p>
+        <p><b>Torneo a disputar: </b> {% if current_user.equipo.torneo %} {{ current_user.equipo.torneo.nombre }} {% else %} Aún no inscrito {% endif %} </p>
+        <input type="submit" value="Editar">
+    </form>
+    <form action="/eliminar/equipo" method="post" style="margin-bottom: 3px;"><input type="submit" value="Eliminar"></form>
+    <button><a href="/equipo/{{ current_user.equipo.id }}" target="_blank">Ir al equipo</a></button>
+
+    <h3>Llaves de Equipo</h3>
+    <form action="/equipo/{{ current_user.equipo.id }}/generar/llave" method="post">
+        <input type="submit" value="Generar Llave">
+    </form>
+    {% for llave in current_user.equipo.llaves %}
+        <p>
+            <a href="/equipo/{{current_user.equipo.id}}/usar/llave/{{llave.token}}" target="_blank">
+                {{llave.token}}
+            </a>
+            {% if llave.usada %}
+                <span> - Usada</span>
+            {% else %}
+                <span> - Disponible</span>
+            {% endif %}
+        </p>
+    {% endfor %}
+
+    {% else %}
+    <form action="/crear/equipo" method="post" style="display: flex; flex-direction: column; width: fit-content; gap: 3px; ">
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" required>
+        <label for="ciudad">Ciudad</label>
+        <input type="text" name="ciudad">
+        <input type="submit" value="Crear">
+    </form>
+    {% endif %}
+
+    {% for message in get_flashed_messages() %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endblock content %}

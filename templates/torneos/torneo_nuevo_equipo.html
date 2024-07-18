@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if current_user.equipo %}
+    <h3>Su equipo ya se encuentra inscrito a este torneo</h3>
+    <button><a href="/dirigente">Ir a inicio</a></button>
+    {% else %}
+    <form action="{{ request.path }}" method="post" style="display: flex; flex-direction: column; gap: 3px; width: fit-content;">
+        <label for="nombre">Nombre del equipo</label>
+        <input type="text" name="nombre">
+        <label for="ciudad">Ciudad</label>
+        <input type="text" name="ciudad">
+        <input type="submit" value="Crear">
+    </form> 
+    {% endif %}
+{% endblock content %}

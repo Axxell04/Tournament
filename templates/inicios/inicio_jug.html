@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <button onclick="window.location.href = '/logout'">Cerrar sesión</button>
+    <h1>Inicio Jugador</h1>
+    <h3>Cedula</h3>
+    <p>{{ current_user.cedula }}</p>
+    <h3>Nombre</h3>
+    <p>{{ current_user.nombre }}</p>
+    <h3>Fecha de nacimiento</h3>
+    <p>{{ current_user.fecha_nacimiento }}</p>
+    <h3>Posición</h3>
+    <p>{{ current_user.posicion }}</p>
+    <h3>Equipo</h3>
+    <p>{{ current_user.equipo.nombre }}</p>
+
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Equipo</h2>
+    <p><b>Nombre: </b>{{ equipo.nombre }}</p>
+    <p><b>Ciudad: </b>{{ equipo.ciudad }}</p>
+    <p><b>Dirigente: </b>{{ equipo.dirigente.nombre }}</p>
+    <p><b>Torneo a disputar: </b>{{ equipo.torneo.nombre }}</p>
+    <p><b> ---- Jugadores ----</b></p>
+    <ul>
+    {% for jugador in equipo.jugadores %}
+        <li> {{ jugador.posicion }} | {{ jugador.nombre }}</li>    
+    {% endfor %}
+    </ul>
+    
+{% endblock content %}

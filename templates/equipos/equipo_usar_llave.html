@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Inscripción de jugador</h2>
+    <form action="{{ request.path }}" method="post" style="display: flex; flex-direction: column; gap: 3px; width: fit-content;">
+        <label for="cedula">Cedula</label>
+        <input type="text" name="cedula" required>
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" required>
+        <label for="contraseña">Contraseña</label>
+        <input type="password" name="contraseña" required>
+        <label for="fecha_nacimiento">Fecha de nacimiento</label>
+        <input type="date" name="fecha_nacimiento">
+        <label for="posicion">Posición</label>
+        <select name="posicion">
+            <option value="DEL">DEL</option>
+            <option value="MC">MC</option>
+            <option value="DEF">DEF</option>
+            <option value="PT">PT</option>
+        </select>
+        <input type="submit" value="Inscribirse">
+    </form>
+{% endblock content %}

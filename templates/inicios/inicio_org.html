@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <button onclick="window.location.href = '/logout'">Cerrar Sesión</button>
+    <h1>Inicio Organizador</h1>
+    <h3>Cedula</h3>
+    {{ current_user.cedula }}
+    <h3>Nombre</h3>
+    {{ current_user.nombre }}
+    <h3>Torneo</h3>
+    {% if not current_user.torneo %}
+        <form action="/crear/torneo" method="post" style="display: flex; flex-direction: column; width: fit-content; gap: 3px;">
+            <label for="nombre">Nombre del torneo</label>
+            <input type="text" name="nombre" required>
+            <label for="descripcion">Descripción</label>
+            <input type="text" name="descripcion" required>
+            <label for="modalidad">Modalidad</label>
+            <input type="text" name="modalidad" required>
+            <label for="ubicacion">Ubicación</label>
+            <input type="text" name="ubicacion" required>
+            <input type="submit" value="Crear">
+        </form>
+        
+    {% else %}
+        <form action="/editar/torneo" method="post" style="margin-bottom: 3px;">
+            <p><b>Nombre: </b><input type="text" name="nombre" value="{{ current_user.torneo.nombre }}" required></p>
+            <p><b>Descripción: </b><input type="text" name="descripcion" value="{{ current_user.torneo.descripcion }}" required></p>
+            <p><b>Modalidad: </b><input type="text" name="modalidad" value="{{ current_user.torneo.modalidad }}" required></p>
+            <p><b>Ubicaciónn: </b><input type="text" name="ubicacion" value="{{ current_user.torneo.ubicacion }}" required></p>
+            <input type="submit" value="Editar">
+        </form>
+        <form action="/eliminar/torneo" method="post" style="margin-bottom: 3px;"><input type="submit" value="Eliminar"></form>
+        <button><a href="/torneo/{{ current_user.torneo.id }}">Ir al torneo</a></button>
+    {% endif %}
+{% endblock content %}

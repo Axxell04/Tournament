@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Login</h1>
+    <form action="{{ action_form }}" method="post"
+    style="display: flex; flex-direction: column; width: fit-content; gap: 3px; margin-bottom: 10px;">
+        <label for="cedula">Cédula</label>
+        <input type="text" name="cedula">
+        <label for="contraseña">Contraseña</label>
+        <input type="password" name="contraseña">
+        <input type="submit" value="Login">
+    </form>
+    {% if registro_url %}
+    <button><a href="{{ registro_url }}">Registrarme</a></button>
+    {% endif %}
+    {% for message in get_flashed_messages() %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endblock content %}

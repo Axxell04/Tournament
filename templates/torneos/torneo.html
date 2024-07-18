@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Torneo</h1>
+    <p><b>Nombre: </b> {{ torneo.nombre }}</p>
+    <p><b>Descripción: </b> {{ torneo.descripcion }}</p>
+    <p><b>Modalidad: </b> {{ torneo.modalidad }}</p>
+    <p><b>Ubicación: </b> {{ torneo.ubicacion }}</p>
+    <p><b>Equipos: </b></p>
+    <ul>
+        {% for equipo in torneo.equipos %}
+        <li>{{ equipo.nombre }}</li>
+        {% endfor %}
+    </ul>
+    <br>
+
+    <button><a href="{{ request.path }}/nuevo/equipo">Inscribir equipo</a></button>
+{% endblock content %}
