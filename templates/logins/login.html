@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <button onclick="history.back()">Volver</button>
     <h1>Login</h1>
     <form action="{{ action_form }}" method="post"
     style="display: flex; flex-direction: column; width: fit-content; gap: 3px; margin-bottom: 10px;">
         <label for="cedula">Cédula</label>
-        <input type="text" name="cedula">
+        <input type="text" name="cedula" required>
         <label for="contraseña">Contraseña</label>
-        <input type="password" name="contraseña">
+        <input type="password" name="contraseña" required>
         <input type="submit" value="Login">
     </form>
     {% if registro_url %}

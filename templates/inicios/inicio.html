@@ -11,4 +11,15 @@
     <ul>
         <li><a href="/login">Login</a></li>
     </ul>
+
+    <h3>Torneos</h3>
+    <ul>
+        {% if torneos %}
+            {% for torneo in torneos %}
+                <li><a href="/torneo/{{ torneo.id }}">{{ torneo.nombre }}</a></li>
+            {% endfor %}
+        {% else %}
+            <li>Actualmente no hay torneos creados</li>
+        {% endif %}
+    </ul>
 {% endblock content %}

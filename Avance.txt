@@ -1,0 +1,14 @@
+#Modalidad del torneo
+Fases de grupos
+Todos contra todos
+
+Conformar grupos de 4 equipos
+    De los 4 grupos generar partidos aleatoreos
+
+El organizador generará un resumen del partido
+    Equipo1 vs Equipo2, Goles, Lista de jugadores
+
+Crear una tabla intermedia entre Jugador y Partido para almacenar sus estadisticas en dicho partido (rojas, amarillas y goles)
+
+#Rol Arbitro
+Acceso de Visualización

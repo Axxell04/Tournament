@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    
+    <button onclick="history.back()">Volver</button>
     <h1>{% block title_registro %}{% endblock title_registro %}</h1>
     <form action="{% block endpoint_registro %} {% endblock endpoint_registro %}" method="post"
     style="display: flex; flex-direction: column; width: fit-content; gap: 3px;">
         <label for="cedula">Cédula</label>
-        <input type="text" name="cedula">
+        <input type="text" name="cedula" required>
         <label for="nombre">Nombre</label>
-        <input type="text" name="nombre">
+        <input type="text" name="nombre" required>
         <label for="contraseña">Contraseña</label>
-        <input type="password" name="contraseña">
+        <input type="password" name="contraseña" required>
         <input type="submit" value="Registrar">
     </form>
 {% endblock content %}

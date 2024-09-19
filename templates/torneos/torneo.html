@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <button onclick="history.back()">Volver</button>
     <h1>Torneo</h1>
+    <p><b>Organizador: </b> {{ torneo.organizador.nombre }}</p>
     <p><b>Nombre: </b> {{ torneo.nombre }}</p>
     <p><b>Descripción: </b> {{ torneo.descripcion }}</p>
     <p><b>Modalidad: </b> {{ torneo.modalidad }}</p>
@@ -9,10 +11,16 @@
     <p><b>Equipos: </b></p>
     <ul>
         {% for equipo in torneo.equipos %}
-        <li>{{ equipo.nombre }}</li>
+        <li><a href="/equipo/{{ equipo.id }}">{{ equipo.nombre}}</a></li>
         {% endfor %}
     </ul>
     <br>
 
+    {% if current_user.torneo == torneo %}
+    <form action="{{ request.path }}/generar/encuentros" method="post">
+        <input type="submit" value="Generar Encuentros">
+    </form>
+    {% else %}
     <button><a href="{{ request.path }}/nuevo/equipo">Inscribir equipo</a></button>
+    {% endif %}
 {% endblock content %}

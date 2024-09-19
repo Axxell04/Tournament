@@ -49,7 +49,8 @@ with app.app_context():
 ## INICIO ##
 @app.route("/", methods=["GET"])
 def inicio():
-    return render_template("inicios/inicio.html")
+    torneos = db.session.execute(db.select(Torneo)).scalars().all()
+    return render_template("inicios/inicio.html", torneos=torneos)
 
 @app.route("/organizador")
 @login_required
@@ -374,6 +375,15 @@ def torneo_id_nuevo_equipo(id:str):
             return redirect(url_for("inicio_dirigente"))
         except:
             return RES_ERROR_PARAMS
+    
+@app.route("/torneo/<string:id>/generar/encuentros", methods=["POST"])
+def torneo_id_generar_encuentros(id:str):
+    torneo = db.session.get(Torneo, current_user.torneo.id)
+    if torneo:
+        for equipo in torneo.equipos:
+            print(equipo.nombre)
+            
+    return redirect(url_for("torneo_id", id=id))
         
     
 ### TORNEO ###
