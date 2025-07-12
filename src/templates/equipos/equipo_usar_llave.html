@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div style="display: flex; flex-direction: row; gap: 10px; align-items: center; justify-content: center; padding-top: 20px;">
+    <div style="display: flex; flex-direction: row; gap: 10px; align-items: center; justify-content: center; padding: 30px;">
         <div class="container-form">
             <h2>Inscripción de jugador</h2>
             <form action="{{ request.path }}" method="post" style="display: flex; flex-direction: column; gap: 3px; width: fit-content;">
@@ -20,7 +20,6 @@
                 <div>
                     <label for="fecha_nacimiento">Fecha de nacimiento</label>
                     <input type="date" name="fecha_nacimiento">
-    
                 </div>
                 <div>
                     <label for="posicion">Posición</label>
@@ -32,6 +31,32 @@
                         <option value="PT">PT</option>
                     </select>
                 </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div>
+                        <label>Ritmo</label>
+                        <input class="input-rit input-stats" type="number" name="ritmo" required min="0" max="99">
+                    </div>
+                    <div>
+                        <label>Regate</label>
+                        <input class="input-reg input-stats" type="number" name="regate" required min="0" max="99">
+                    </div>
+                    <div>
+                        <label>Tiro</label>
+                        <input class="input-tir input-stats" type="number" name="tiro" required min="0" max="99">
+                    </div>
+                    <div>
+                        <label>Defensa</label>
+                        <input class="input-def input-stats" type="number" name="defensa" required min="0" max="99">
+                    </div>
+                    <div>
+                        <label>Pase</label>
+                        <input class="input-pas input-stats" type="number" name="pase" required min="0" max="99">
+                    </div>
+                    <div>
+                        <label>Fisico</label>
+                        <input class="input-fis input-stats" type="number" name="fisico" required min="0" max="99">
+                    </div>
+                </div>
                 <br>
                 <input class="btn" type="submit" value="Inscribirse">
             </form>
@@ -39,7 +64,7 @@
     
         <div class="card scale-in-center">
             <span class="player-media">
-                85
+                --
             </span>
             <span class="player-position">
                 ---
@@ -51,13 +76,13 @@
             <section>
                 <div>
                     <span class="player-stats-left-values player-rit-value">
-                        99
+                        --
                     </span>
                     <span class="player-stats-left-values player-tir-value">
-                        99
+                        --
                     </span>
                     <span class="player-stats-left-values player-pas-value">
-                        99
+                        --
                     </span>
                 </div>
                 <div>
@@ -76,13 +101,13 @@
             <section>
                 <div>
                     <span class="player-stats-right-values player-reg-value">
-                        99
+                        --
                     </span>
                     <span class="player-stats-right-values player-def-value">
-                        99
+                        --
                     </span>
                     <span class="player-stats-right-values player-fis-value">
-                        99
+                        --
                     </span>
                 </div>
                 <div>
@@ -106,10 +131,53 @@
     </div>
 
     <script>
+        // InputsElements
         let inputNombre = document.querySelector(".input-nombre");
         let inputPosicion = document.querySelector(".input-posicion");
+        let inputRit = document.querySelector(".input-rit");
+        let inputReg = document.querySelector(".input-reg");
+        let inputTir = document.querySelector(".input-tir");
+        let inputDef = document.querySelector(".input-def");
+        let inputPas = document.querySelector(".input-pas");
+        let inputFis = document.querySelector(".input-fis");
+        // ShowElements
         let playerNameCard = document.querySelector(".player-name");
         let playerPosition = document.querySelector(".player-position");
+        let playerRit = document.querySelector(".player-rit-value");
+        let playerReg = document.querySelector(".player-reg-value");
+        let playerTir = document.querySelector(".player-tir-value");
+        let playerDef = document.querySelector(".player-def-value");
+        let playerPas = document.querySelector(".player-pas-value");
+        let playerFis = document.querySelector(".player-fis-value");
+        
+        let playerMedia = document.querySelector(".player-media");
+
+        let listStatsInputs = [
+            inputRit, inputReg, inputTir, inputDef, inputPas, inputFis
+        ];
+        let listStastShow = [
+            playerRit, playerReg, playerTir, playerDef, playerPas, playerFis
+        ];
+
+        listStatsInputs.forEach((inputStat, index) => {
+            inputStat.addEventListener("input", (e) => {
+                const value = e.target.value;
+                updatePlayerMedia();
+                if (value) {
+                    listStastShow[index].textContent = value;
+                } else {
+                    listStastShow[index].textContent = "--";
+                }
+            });
+        })
+
+        function updatePlayerMedia () {
+            if (listStatsInputs.every((inputStat) => inputStat.value)) {
+                let sum = listStatsInputs.reduce((pv, cv) => pv + parseInt(cv.value), 0);
+                let prom = sum / listStatsInputs.length;
+                playerMedia.textContent = prom.toFixed(0);
+            }
+        }
 
         inputNombre.addEventListener("input", (e) => {
             const target = e.target;
@@ -152,13 +220,16 @@
             gap: 10px;
             width: fit-content;
             /* margin-inline: auto; */
-            margin-top: 50px;
+            /* margin-top: 50px; */
         }
         .container-form div {
             display: flex;
             flex-direction: column;
             gap: 5px;
             place-items: center;
+        }
+        .input-stats {
+            width: 40px;
         }
     </style>
 
