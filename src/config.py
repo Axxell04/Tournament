@@ -5,7 +5,7 @@ from urllib.parse import quote
 load_dotenv()
 
 DEFAULT_SECRET_KEY = "e645e0943762193135c7566e173e647ec70686d8e1b6bd4a581195bc4e57a6ff"
-DEFAULT_MYSQL_ROOT_PASSWORD = ""
+DEFAULT_MYSQL_ROOT_PASSWORD = "root"
 
 class Config():
     SECRET_KEY = os.getenv("SECRET_KEY", DEFAULT_SECRET_KEY)

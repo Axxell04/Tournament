@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="container-btns">
+            <button class="btn" onclick="history.back()">Volver</button>
+        </div>
+        <div class="container-form">
+            <h1>Login</h1>
+            <form action="{{ action_form }}" method="post"
+            style="display: flex; flex-direction: column; width: fit-content; gap: 3px; margin-bottom: 10px;">
+                <div>
+                    <label for="cedula">Cédula</label>
+                    <input type="text" name="cedula" required>
+                </div>
+                <div>
+                    <label for="contraseña">Contraseña</label>
+                    <input type="password" name="contraseña" required>
+                </div>
+                <br>
+                <input class="btn" type="submit" value="Login">
+            </form>
+            {% if registro_url %}
+            <button class="btn"><a href="{{ registro_url }}">Registrarme</a></button>
+            {% endif %}
+            <br>
+            {% for message in get_flashed_messages() %}
+                <p style="color: crimson;">{{ message }}</p>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <style>
+        .container {
+            position: relative;
+            max-width: 100dvw;
+        }
+        .container-btns {
+            position: relative;
+            display: flex;
+            flex-grow: 1;
+            flex-direction: row;
+            place-content: center;
+            gap: 10px;
+            padding: 20px;
+        }
+        .btn {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid black;
+        }
+        .btn:hover {
+            background-color: crimson;
+            color: aliceblue;
+        }
+        .container-form {
+            display: flex;
+            flex-direction: column;
+            background-color: gainsboro;
+            place-items: center;
+            padding: 20px 50px;
+            border: 1px solid black;
+            border-radius: 15px;
+            gap: 10px;
+            width: fit-content;
+            margin-inline: auto;
+        }
+        .container-form div {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            place-items: center;
+        }
+    </style>
+
+{% endblock content %}

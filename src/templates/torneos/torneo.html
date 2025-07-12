@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="container-btns">
+            <button class="btn btn-1" onclick="history.back()">Volver</button>
+    
+            {% if current_user.torneo == torneo %}
+            <!-- <form action="{{ request.path }}/generar/encuentros" method="post">
+                <input type="submit" value="Generar Encuentros">
+            </form> -->
+            {% else %}
+            <button class="btn btn-2"><a href="{{ request.path }}/nuevo/equipo">Inscribir equipo</a></button>
+            {% endif %}
+        </div>
+        <div class="container-torneo">
+            <h1>Torneo</h1>
+            <div>
+                <span>
+                    <b>Nombre</b>
+                </span>
+                <span>
+                    {{ torneo.nombre }}
+                </span>
+            </div>
+            <div>
+                <span>
+                    <b>Organizador</b>
+                </span>
+                <span>
+                    {{ torneo.organizador.nombre }}
+                </span>
+            </div>
+            <div>
+                <span>
+                    <b>Descripción</b>
+                </span>
+                <span>
+                    {{ torneo.descripcion }}
+                </span>
+            </div>
+            <div>
+                <span>
+                    <b>Modalidad</b>
+                </span>
+                <span>
+                    {{ torneo.modalidad }}
+                </span>
+            </div>
+            <div>
+                <span>
+                    <b>Ubicacion</b>
+                </span>
+                <span>
+                    {{ torneo.ubicacion }}
+                </span>
+            </div>
+            <div>
+                <span>
+                    <b>Equipos</b>
+                </span>
+                <ul>
+                    {% for equipo in torneo.equipos %}
+                    <li><a href="/equipo/{{ equipo.id }}">{{ equipo.nombre}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+    </div>    
+
+    <style>
+        .container {
+            position: relative;
+            max-width: 100dvw;
+        }
+        .container-btns {
+            position: relative;
+            display: flex;
+            flex-grow: 1;
+            flex-direction: row;
+            place-content: center;
+            gap: 10px;
+            padding: 20px;
+        }
+        .btn {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid black;
+        }
+        .btn:hover {
+            background-color: crimson;
+            color: aliceblue;
+        }
+        .container-torneo {
+            display: flex;
+            flex-direction: column;
+            background-color: gainsboro;
+            place-items: center;
+            padding: 20px 50px;
+            border: 1px solid black;
+            border-radius: 15px;
+            gap: 10px;
+            width: fit-content;
+            margin-inline: auto;
+        }
+        .container-torneo div {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            place-items: center;
+        }
+        ul {
+            list-style: none;
+        }
+        a:hover {
+            color: crimson;
+        }
+    </style>
+{% endblock content %}

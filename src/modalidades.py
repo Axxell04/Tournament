@@ -1,5 +1,5 @@
 import random
-equipos = ["Equipo1", "Equipo2", "Equipo3", "Equipo4", "Equipo5", "Equipo6"]
+equipos = ["Equipo1", "Equipo2", "Equipo3", "Equipo4"]
 
 class TodosVsTodos():
     @classmethod

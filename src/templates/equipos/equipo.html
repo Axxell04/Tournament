@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="container-btns">
+            <button class="btn" onclick="history.back()">Volver</button>
+        </div>
+        <div class="container-interno">
+            <h2>Equipo</h2>
+            <div>
+                <span>
+                    <b>Nombre</b>
+                </span>
+                <span>
+                    {{ equipo.nombre }}
+                </span>
+            </div>
+            <div>
+                <span>
+                    <b>Ciudad</b>
+                </span>
+                <span>
+                    {{ equipo.ciudad }}
+                </span>
+            </div>
+            <div>
+                <span>
+                    <b>Dirigente</b>
+                </span>
+                <span>
+                    {{ equipo.dirigente.nombre }}
+                </span>
+            </div>
+            <div>
+                <span>
+                    <b>Torneo a disputar</b>
+                </span>
+                <span>
+                    {{ equipo.torneo.nombre }}
+                </span>
+            </div>
+            <div>
+                <p><b> ---- Jugadores ----</b></p>
+                <ul>
+                {% for jugador in equipo.jugadores %}
+                    <li> {{ jugador.posicion }} | {{ jugador.nombre }}</li>    
+                {% endfor %}
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    
+
+
+    <style>
+        .container {
+            position: relative;
+            max-width: 100dvw;
+        }
+        .container-btns {
+            position: relative;
+            display: flex;
+            flex-grow: 1;
+            flex-direction: row;
+            place-content: center;
+            gap: 10px;
+            padding: 20px;
+        }
+        .btn {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid black;
+        }
+        .btn:hover {
+            background-color: crimson;
+            color: aliceblue;
+        }
+        .container-interno {
+            display: flex;
+            flex-direction: column;
+            background-color: gainsboro;
+            place-items: center;
+            padding: 20px 50px;
+            border: 1px solid black;
+            border-radius: 15px;
+            gap: 10px;
+            width: fit-content;
+            margin-inline: auto;
+        }
+        .container-interno div {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            place-items: center;
+        }
+        ul {
+            list-style: none;
+        }
+    </style>
+
+{% endblock content %}

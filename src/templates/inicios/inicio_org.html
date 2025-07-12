@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="container-btns">
+            <button class="btn" onclick="window.location.href = '/logout'">Cerrar Sesión</button>
+        </div>
+        <div class="container-interno">
+            <h1>Inicio Organizador</h1>
+            <h3>Cedula</h3>
+            {{ current_user.cedula }}
+            <h3>Nombre</h3>
+            {{ current_user.nombre }}
+            <div style="border: 1px solid black; border-radius: 12px; padding: 5px 10px;">
+                <h3 style="margin-top: 3px;">Torneo</h3>
+                {% if not current_user.torneo %}
+                    <form action="/crear/torneo" method="post" style="display: flex; flex-direction: column; gap: 4px; place-items: center;">
+                        <div>
+                            <label for="nombre">Nombre del torneo</label>
+                            <input type="text" name="nombre" required>
+                        </div>
+                        <div>
+                            <label for="descripcion">Descripción</label>
+                            <input type="text" name="descripcion" required>
+                        </div>
+                        <div>
+                            <label for="modalidad">Modalidad</label>
+                            <input type="text" name="modalidad" required>
+                        </div>
+                        <div>
+                            <label for="ubicacion">Ubicación</label>
+                            <input type="text" name="ubicacion" required>
+                        </div>
+                        <br>
+                        <input class="btn" type="submit" value="Crear">
+                    </form>
+                    
+                    {% else %}
+                    <form action="/editar/torneo" method="post" style="display: flex; flex-direction: column; gap: 4px; place-items: center;">
+                        <div>
+                            <label for="nombre">Nombre</label>
+                            <input type="text" name="nombre" value="{{ current_user.torneo.nombre }}" required>
+                        </div>
+                        <div>
+                            <label for="descripcion">Descripción</label>
+                            <input type="text" name="descripcion" value="{{ current_user.torneo.descripcion }}" required>
+                        </div>
+                        <div>
+                            <label for="modalidad">Modalidad</label>
+                            <input type="text" name="modalidad" value="{{ current_user.torneo.modalidad }}" required>
+                        </div>
+                        <div>
+                            <label for="ubicacion">Ubicación</label>
+                            <input type="text" name="ubicacion" value="{{ current_user.torneo.ubicacion }}" required>
+                        </div>
+                        <input class="btn" type="submit" value="Editar">
+                    </form>
+                    <form action="/eliminar/torneo" method="post" style="margin-bottom: 3px;"><input type="submit" value="Eliminar"></form>
+                    <button class="btn"><a href="/torneo/{{ current_user.torneo.id }}">Ir al torneo</a></button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+    <style>
+        .container {
+            position: relative;
+            max-width: 100dvw;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .container-btns {
+            position: relative;
+            display: flex;
+            flex-grow: 1;
+            flex-direction: row;
+            place-content: center;
+            gap: 10px;
+            padding: 20px;
+        }
+        .btn {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid black;
+        }
+        .btn:hover {
+            background-color: crimson;
+            color: aliceblue;
+        }
+        .container-interno {
+            display: flex;
+            flex-direction: column;
+            background-color: gainsboro;
+            place-items: center;
+            padding: 20px 40px;
+            border: 1px solid black;
+            border-radius: 15px;
+            gap: 10px;
+            width: fit-content;
+            margin-inline: auto;
+        }
+        .container-interno div {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            place-items: center;
+        }
+        a:hover {
+            color: crimson;
+        }
+    </style>
+
+{% endblock content %}

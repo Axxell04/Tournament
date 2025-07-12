@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 style="text-align: center; margin-bottom: 40px;">Tournament</h1>
+    <div style="display: flex; flex-direction: column; gap: 50px; padding: 20px; place-items: center;">
+        <div class="container-2" style="border: 1px solid black; border-radius: 15px; text-align: center;">
+            <h3>Torneos</h3>
+            <ul>
+                {% if torneos %}
+                    {% for torneo in torneos %}
+                        <li class="item-torneo"><a href="/torneo/{{ torneo.id }}">{{ torneo.nombre }}</a></li>
+                    {% endfor %}
+                {% else %}
+                    <li>Actualmente no hay torneos creados</li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="container-2 options" style="border: 1px solid black; border-radius: 15px;">
+            <h3>Opciones</h3>
+            <ul>
+                <li><a href="/registro/organizador">Registro Organizador</a></li>
+                <li><a href="/registro/dirigente">Registro Dirigente</a></li>
+                <li><a href="/login">Login</a></li>
+            </ul>
+        </div>        
+    </div>
+
+    <style>
+        ul {
+            list-style: none;
+            text-align: center;
+        }
+        .container-2 {
+            padding: 20px;
+            max-width: 500px;
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            background-color: gainsboro;
+        }
+
+        .options {
+            height: 15px;
+            overflow: hidden;
+            text-align: center;
+            padding-top: 5px;
+            transition: padding-top .5s;
+            transition: height .5s;
+            interpolate-size: allow-keywords;
+        }
+
+        .options:hover {
+            padding-top: 20px;
+            height: auto;
+        }
+
+        a:hover {
+            color: crimson;
+        }
+    </style>
+
+{% endblock content %}
